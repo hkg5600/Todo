@@ -3,14 +3,18 @@ package com.example.todo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Text
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.viewinterop.viewModel
 import androidx.ui.tooling.preview.Preview
 import com.example.todo.ui.TodoTheme
+import androidx.compose.runtime.getValue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,12 +31,22 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+@ExperimentalCoroutinesApi
 @Composable
 fun Greeting(name: String) {
 
     val viewModel: MainViewModel = viewModel(factory = viewModelProvider { MainViewModel() })
 
-    Text(text = "Hello $name!")
+    val viewState by viewModel.state.collectAsState()
+
+    Column {
+        Text(text = viewState.todos.last().title)
+        Button(onClick = {
+            viewModel.test()
+        }) {
+            Text(text = "Click me")
+        }
+    }
 }
 
 @Preview(showBackground = true)
