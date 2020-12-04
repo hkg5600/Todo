@@ -22,6 +22,18 @@ class TodoDataSource {
         FakeTodoDatabase.modifyTodo(todo)
     }
 
+    fun findTodoByKeyword(keyword: String): List<Todo> {
+        return FakeTodoDatabase.findTodoByKeyword(keyword)
+    }
+
+    fun findDoneTodo(keyword: String?) : List<Todo> {
+        return FakeTodoDatabase.findDoneTodo(keyword)
+    }
+
+    fun findProgressingTodo(keyword: String?) : List<Todo> {
+        return FakeTodoDatabase.findProgressingTodo(keyword)
+    }
+
     fun deleteTodo(todo: Todo) {
         FakeTodoDatabase.deleteTodo(todo)
     }

@@ -3,7 +3,6 @@ package com.example.todo
 import com.example.todo.model.Todo
 import com.example.todo.repository.TodoRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -67,7 +66,7 @@ class TodoRepositoryTest {
             id = oldTodo.id,
             title = "New Title",
             date = "New Date",
-            done = false
+            done = true
         )
 
         todoRepository.modifyTodo(newTodo)
@@ -75,6 +74,51 @@ class TodoRepositoryTest {
         val newTodos = todoRepository.getTodos()
 
         assert(newTodos[0].title == "New Title")
+    }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun find_todo_by_keyword() = runBlockingTest {
+        val keyword = "Test1"
+
+        val todo = todoRepository.findTodoByKeyword(keyword)
+
+        assert(todo[0].title == "Test1")
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun find_done_todo() = runBlockingTest {
+        val doneTodos = todoRepository.findDoneTodo()
+
+        assert(doneTodos.none { !it.done })
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun find_progressing_todo() = runBlockingTest {
+        val progressingTodos = todoRepository.findProgressingTodo()
+
+        assert(progressingTodos.none { it.done })
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun find_done_todo_by_keyword() = runBlockingTest {
+        val keyword = "Test1"
+
+        val doneTodos = todoRepository.findDoneTodo(keyword)
+
+        assert(doneTodos.isEmpty())
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun find_progressing_todo_by_keyword() = runBlockingTest {
+        val keyword = "Test1"
+
+        val doneTodos = todoRepository.findProgressingTodo(keyword)
+
+        assert(doneTodos.isNotEmpty())
     }
 }

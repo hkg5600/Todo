@@ -22,6 +22,18 @@ class TodoRepositoryImpl(private val dataSource: TodoDataSource) : TodoRepositor
         return dataSource.modifyTodo(todo)
     }
 
+    override fun findTodoByKeyword(keyword: String): List<Todo> {
+        return dataSource.findTodoByKeyword(keyword)
+    }
+
+    override fun findDoneTodo(keyword: String?): List<Todo> {
+        return dataSource.findDoneTodo(keyword)
+    }
+
+    override fun findProgressingTodo(keyword: String?): List<Todo> {
+        return dataSource.findProgressingTodo(keyword)
+    }
+
     override fun deleteTodo(todo: Todo) {
         dataSource.deleteTodo(todo)
     }

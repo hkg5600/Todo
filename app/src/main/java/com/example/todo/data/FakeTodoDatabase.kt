@@ -1,11 +1,6 @@
 package com.example.todo.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.example.todo.model.Todo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flowOf
 
 object FakeTodoDatabase {
 
@@ -43,8 +38,23 @@ object FakeTodoDatabase {
     }
 
     fun modifyTodo(todo: Todo) {
-        val changeIndex = todos.indexOf(todos.find{ it.id == todo.id}) // Get todo's index will change
+        val changeIndex =
+            todos.indexOf(todos.find { it.id == todo.id }) // Get todo's index will change
         todos[changeIndex] = todo
+    }
+
+    fun findTodoByKeyword(keyword: String): List<Todo> {
+        return todos.filter { it.title.contains(keyword) }
+    }
+
+    fun findDoneTodo(keyword: String?): List<Todo> {
+        val doneTodo = todos.filter { it.done }
+        return if (keyword != null) doneTodo.filter { it.title.contains(keyword) } else doneTodo
+    }
+
+    fun findProgressingTodo(keyword: String?): List<Todo> {
+        val progressingTodo = todos.filter { !it.done }
+        return if (keyword != null) progressingTodo.filter { it.title.contains(keyword) } else progressingTodo
     }
 
     fun deleteTodo(todo: Todo) {
