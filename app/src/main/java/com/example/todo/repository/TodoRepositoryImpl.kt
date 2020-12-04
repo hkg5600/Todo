@@ -18,6 +18,10 @@ class TodoRepositoryImpl(private val dataSource: TodoDataSource) : TodoRepositor
         return dataSource.getTodos()
     }
 
+    override fun modifyTodo(todo: Todo) {
+        return dataSource.modifyTodo(todo)
+    }
+
     override fun deleteTodo(todo: Todo) {
         dataSource.deleteTodo(todo)
     }

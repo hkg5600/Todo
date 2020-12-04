@@ -8,6 +8,7 @@ interface TodoRepository {
     fun addTodo(todo: Todo)
     fun getTodoById(id: String) : Todo
     fun getTodos() : ArrayList<Todo>
+    fun modifyTodo(todo: Todo)
     fun deleteTodo(todo: Todo)
     fun markDone(todo: Todo)
     fun markInProgress(todo: Todo)

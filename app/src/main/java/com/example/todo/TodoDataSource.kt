@@ -18,6 +18,10 @@ class TodoDataSource {
         return FakeTodoDatabase.getTodos()
     }
 
+    fun modifyTodo(todo: Todo) {
+        FakeTodoDatabase.modifyTodo(todo)
+    }
+
     fun deleteTodo(todo: Todo) {
         FakeTodoDatabase.deleteTodo(todo)
     }

@@ -50,7 +50,6 @@ class TodoRepositoryTest {
     @Test
     fun delete_first_todo() = runBlockingTest {
         val todos = todoRepository.getTodos()
-        assert(todos.isNotEmpty())
 
         todoRepository.deleteTodo(todos.first())
 
@@ -58,4 +57,24 @@ class TodoRepositoryTest {
         assert(todos.size != deletedTodos.size)
     }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun modify_todo() = runBlockingTest {
+        val oldTodos = todoRepository.getTodos()
+        val oldTodo = oldTodos[0]
+
+        val newTodo = Todo(
+            id = oldTodo.id,
+            title = "New Title",
+            date = "New Date",
+            done = false
+        )
+
+        todoRepository.modifyTodo(newTodo)
+
+        val newTodos = todoRepository.getTodos()
+
+        assert(newTodos[0].title == "New Title")
+
+    }
 }

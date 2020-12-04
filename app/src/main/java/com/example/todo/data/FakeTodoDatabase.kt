@@ -42,6 +42,11 @@ object FakeTodoDatabase {
         return todos
     }
 
+    fun modifyTodo(todo: Todo) {
+        val changeIndex = todos.indexOf(todos.find{ it.id == todo.id}) // Get todo's index will change
+        todos[changeIndex] = todo
+    }
+
     fun deleteTodo(todo: Todo) {
         todos.remove(todo)
     }
