@@ -10,6 +10,10 @@ class TodoDataSource {
         FakeTodoDatabase.addTodo(todo)
     }
 
+    fun getTodoById(id: String): Todo {
+        return FakeTodoDatabase.getTodoById(id)
+    }
+
     fun getTodos(): ArrayList<Todo> {
         return FakeTodoDatabase.getTodos()
     }

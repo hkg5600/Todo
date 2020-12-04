@@ -10,6 +10,10 @@ class TodoRepositoryImpl(private val dataSource: TodoDataSource) : TodoRepositor
         dataSource.addTodo(todo)
     }
 
+    override fun getTodoById(id: String): Todo {
+        return dataSource.getTodoById(id)
+    }
+
     override fun getTodos(): ArrayList<Todo> {
         return dataSource.getTodos()
     }

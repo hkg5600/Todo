@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TodoRepository {
     fun addTodo(todo: Todo)
+    fun getTodoById(id: String) : Todo
     fun getTodos() : ArrayList<Todo>
     fun deleteTodo(todo: Todo)
     fun markDone(todo: Todo)

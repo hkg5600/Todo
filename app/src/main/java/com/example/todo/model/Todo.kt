@@ -1,6 +1,7 @@
 package com.example.todo.model
 
 data class Todo(
+    val id : String,
     val title: String,
     val date: String,
     var done: Boolean
