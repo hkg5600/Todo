@@ -7,7 +7,6 @@ import com.example.todo.model.Todo
 import com.example.todo.repository.TodoRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -20,16 +19,32 @@ class MainViewModel(
         get() = _state
 
     init {
+        getTodos()
+    }
+
+    fun getTodos() {
         viewModelScope.launch {
             val todos = todoRepository.getTodos()
             _state.value = MainViewState(todos.toList())
         }
     }
 
-    fun test() {
+    fun toggleTodo(todo: Todo) {
         viewModelScope.launch {
-            val todos = todoRepository.getTodos()
-            _state.value = MainViewState(todos.toList())
+            todoRepository.toggleTodo(todo)
+        }
+    }
+
+    fun addTodo(title: String) {
+        viewModelScope.launch {
+            val todo = Todo(
+                id = Date().time.toString(),
+                title = title,
+                done = false,
+                date = Date().time.toString()
+            )
+            todoRepository.addTodo(todo)
+            getTodos()
         }
     }
 }

@@ -13,6 +13,5 @@ interface TodoRepository {
     fun findDoneTodo(keyword: String? = null): List<Todo>
     fun findProgressingTodo(keyword: String? = null): List<Todo>
     fun deleteTodo(todo: Todo)
-    fun markDone(todo: Todo)
-    fun markInProgress(todo: Todo)
+    fun toggleTodo(todo: Todo)
 }

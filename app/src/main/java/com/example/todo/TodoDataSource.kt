@@ -1,9 +1,7 @@
 package com.example.todo
 
-import androidx.lifecycle.LiveData
 import com.example.todo.data.FakeTodoDatabase
 import com.example.todo.model.Todo
-import kotlinx.coroutines.flow.Flow
 
 class TodoDataSource {
     fun addTodo(todo: Todo) {
@@ -38,11 +36,7 @@ class TodoDataSource {
         FakeTodoDatabase.deleteTodo(todo)
     }
 
-    fun markDone(todo: Todo) {
-        FakeTodoDatabase.markDone(todo)
-    }
-
-    fun markInProgress(todo: Todo) {
-        FakeTodoDatabase.markInProgress(todo)
+    fun toggleTodo(todo: Todo) {
+        FakeTodoDatabase.toggleTodo(todo)
     }
 }

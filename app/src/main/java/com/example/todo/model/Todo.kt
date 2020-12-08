@@ -2,15 +2,22 @@ package com.example.todo.model
 
 data class Todo(
     val id : String,
-    val title: String,
+    var title: String,
     val date: String,
     var done: Boolean
 ) {
-    fun markAsDone() {
+    private fun markAsDone() {
        this.done = true
     }
 
-    fun markAsInProgress() {
+    private fun markAsInProgress() {
         this.done = false
+    }
+
+    fun toggleTodo() {
+        if (this.done)
+            markAsInProgress()
+        else
+            markAsDone()
     }
 }

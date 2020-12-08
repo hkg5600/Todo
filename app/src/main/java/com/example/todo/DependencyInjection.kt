@@ -8,16 +8,18 @@ object DependencyInjection {
 
     var context: Context? = null
         get() {
-            return field ?: throw Exception("There is no context set")
+            return field ?: throw Exception("Context must be set!")
         }
 
-    private val todoDataSource = TodoDataSource()
+    private val todoDataSource by lazy {
+        TodoDataSource()
+    }
 
     val todoRepository: TodoRepository by lazy {
         TodoRepositoryImpl(todoDataSource)
     }
 
-    fun start(context: Context) {
+    fun startApp(context: Context) {
         this.context = context
     }
 }

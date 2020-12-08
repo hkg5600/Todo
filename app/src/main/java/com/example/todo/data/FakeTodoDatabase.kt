@@ -1,9 +1,11 @@
 package com.example.todo.data
 
 import com.example.todo.model.Todo
+import java.util.*
+import kotlin.collections.ArrayList
 
 object FakeTodoDatabase {
-
+    var times = 0
     private var todos = arrayListOf<Todo>(
         Todo(
             "id1",
@@ -34,6 +36,13 @@ object FakeTodoDatabase {
     }
 
     fun getTodos(): ArrayList<Todo> {
+//        val todo = Todo(
+//            id = "id1",
+//            title = "Changed Todo ${++times}",
+//            date = "test",
+//            done = true
+//        )
+//        modifyTodo(todo)
         return todos
     }
 
@@ -61,13 +70,9 @@ object FakeTodoDatabase {
         todos.remove(todo)
     }
 
-    fun markDone(todo: Todo) {
+    fun toggleTodo(todo: Todo) {
         val index = todos.indexOf(todo)
-        todos[index].markAsDone()
+        todos[index].toggleTodo()
     }
 
-    fun markInProgress(todo: Todo) {
-        val index = todos.indexOf(todo)
-        todos[index].markAsInProgress()
-    }
 }

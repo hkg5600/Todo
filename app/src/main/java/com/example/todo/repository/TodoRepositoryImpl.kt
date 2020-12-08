@@ -1,9 +1,7 @@
 package com.example.todo.repository
 
-import androidx.lifecycle.LiveData
 import com.example.todo.TodoDataSource
 import com.example.todo.model.Todo
-import kotlinx.coroutines.flow.Flow
 
 class TodoRepositoryImpl(private val dataSource: TodoDataSource) : TodoRepository {
     override fun addTodo(todo: Todo) {
@@ -38,11 +36,7 @@ class TodoRepositoryImpl(private val dataSource: TodoDataSource) : TodoRepositor
         dataSource.deleteTodo(todo)
     }
 
-    override fun markDone(todo: Todo) {
-        dataSource.markDone(todo)
-    }
-
-    override fun markInProgress(todo: Todo) {
-        dataSource.markInProgress(todo)
+    override fun toggleTodo(todo: Todo) {
+        dataSource.toggleTodo(todo)
     }
 }
